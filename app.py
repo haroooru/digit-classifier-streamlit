@@ -15,7 +15,7 @@ def preprocess(image):
     # Convert to grayscale
     image = ImageOps.grayscale(image)
     # Resize to 8x8 pixels (like sklearn digits dataset)
-    image = image.resize((8, 8), Image.ANTIALIAS)
+    image = image.resize((8, 8), Image.Resampling.LANCZOS)  # <-- updated here
     # Convert to numpy array
     image_np = np.array(image)
     # Invert colors if needed (digits dataset is white-on-black)
@@ -30,3 +30,4 @@ if uploaded_file is not None:
     input_data = preprocess(image)
     prediction = clf.predict(input_data)
     st.write(f"Predicted digit: {prediction[0]}")
+
